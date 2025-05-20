@@ -1,2 +1,0 @@
-# strife
-When Discord's IPO was announced my friend group and I were joking that we've probably got about a year left before Discord got terrible.  I decided to build a clone/alternative to discord, not necessarily as an app that we would use, but as a way to have current, publically accessible code samples available that are working towards something potentially useful were I to finish it one day.
