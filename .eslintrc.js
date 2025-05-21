@@ -6,6 +6,9 @@
 
 /** @type {import('eslint').Linter.Config} */
 module.exports = {
+  rules: {
+    "react/display-name": "off",
+  },
   root: true,
   parserOptions: {
     ecmaVersion: "latest",
