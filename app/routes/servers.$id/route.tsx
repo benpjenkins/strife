@@ -1,4 +1,5 @@
 import { useLoaderData } from "@remix-run/react";
+import { supabase } from "~/database";
 
 type LoaderParams = {
   params: {
@@ -6,12 +7,15 @@ type LoaderParams = {
   };
 };
 
-export const loader = ({ params: { id } }: LoaderParams) => {
+export const loader = async ({ params: { id } }: LoaderParams) => {
+  const { data, error } = await supabase
+    .from("channel")
+    .select("*")
+    .eq("server_id", id);
+  console.log("data", data);
+  if (error) throw error;
   return {
-    channels: [
-      { id: 1, name: "hope-core" },
-      { id: 2, name: "nom-noms" },
-    ],
+    channels: data,
   };
 };
 

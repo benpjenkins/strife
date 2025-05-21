@@ -6,10 +6,8 @@ import {
   ScrollRestoration,
   useLoaderData,
 } from "@remix-run/react";
-import type { LinksFunction } from "@remix-run/node";
 
 import "./tailwind.css";
-import { EnvironmentModuleNode } from "vite";
 
 export const meta = () => {
   return [{ title: "Strife" }];
@@ -41,7 +39,7 @@ export function Layout({ children }: { children: React.ReactNode }) {
           dangerouslySetInnerHTML={{
             __html: `window.STRIFE_ENV = ${JSON.stringify(STRIFE_ENV)}`,
           }}
-        ></script>
+        />
         <ScrollRestoration />
         <Scripts />
       </body>

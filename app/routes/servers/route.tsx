@@ -1,18 +1,23 @@
-import { Outlet, useLoaderData } from "@remix-run/react";
+import { Link, Outlet, useLoaderData } from "@remix-run/react";
+import { supabase } from "~/database";
 
-export const loader = () => {
+export const loader = async () => {
+  const { data, error } = await supabase.from("server").select("*");
+  if (error) throw error;
   return {
-    servers: [{ id: 1, name: "Mefca Classic", status: "active" }],
+    servers: data,
   };
 };
 
 export default () => {
   const { servers } = useLoaderData<typeof loader>();
   return (
-    <div className="flex flex=row gap-4">
-      {servers.map((server) => {
-        return <p>{server.name}</p>;
-      })}
+    <div className="flex flex-row gap-4">
+      <div className="flex flex-col gap-4">
+        {servers.map((server) => {
+          return <Link to={`/servers/${server.id}`}>{server.name}</Link>;
+        })}
+      </div>
       <Outlet />
     </div>
   );
