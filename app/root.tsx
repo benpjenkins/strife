@@ -9,14 +9,15 @@ import {
 import type { LinksFunction } from "@remix-run/node";
 
 import "./tailwind.css";
+import { EnvironmentModuleNode } from "vite";
 
 export const meta = () => {
-  return { title: "Strife" };
+  return [{ title: "Strife" }];
 };
 
 export const loader = () => {
   return {
-    ENV: {
+    STRIFE_ENV: {
       SUPABASE_URL: process.env.SUPABASE_URL,
       SUPABASE_KEY: process.env.SUPABASE_KEY,
     },
@@ -24,7 +25,8 @@ export const loader = () => {
 };
 
 export function Layout({ children }: { children: React.ReactNode }) {
-  const { ENV } = useLoaderData<typeof loader>();
+  const data = useLoaderData<typeof loader>();
+  const { STRIFE_ENV } = data;
   return (
     <html lang="en">
       <head>
@@ -37,8 +39,9 @@ export function Layout({ children }: { children: React.ReactNode }) {
         {children}
         <script
           dangerouslySetInnerHTML={{
-            __html: `window.STRIFE_ENV = ${JSON.stringify(ENV)}`,
+            __html: `window.STRIFE_ENV = ${JSON.stringify(STRIFE_ENV)}`,
           }}
+        ></script>
         <ScrollRestoration />
         <Scripts />
       </body>
@@ -47,5 +50,5 @@ export function Layout({ children }: { children: React.ReactNode }) {
 }
 
 export default function App() {
-  return (<Outlet />);
+  return <Outlet />;
 }
