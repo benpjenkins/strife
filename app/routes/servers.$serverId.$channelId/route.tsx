@@ -1,18 +1,21 @@
 import { Form, useFetcher, useLoaderData } from "@remix-run/react";
-import { supabase } from "~/database";
+import { createBrowserClient, createServerClient } from "~/database";
 import { useEffect, useState } from "react";
 import { Tables } from "~/types/database.types";
 
 type LoaderParams = {
-  params: {
-    channelId: string;
-    serverId: string;
-  };
+  channelId: string;
+  serverId: string;
 };
 
-export const loader = async ({
-  params: { channelId, serverId },
-}: LoaderParams) => {
+type LoaderArgs = {
+  request: Request;
+  params: LoaderParams;
+};
+
+export const loader = async ({ request, params }: LoaderArgs) => {
+  const supabase = createServerClient(request);
+  const { channelId, serverId } = params;
   const { data: loadedMessages, error } = await supabase
     .from("message")
     .select("*")
@@ -26,6 +29,7 @@ export const loader = async ({
 };
 
 export const action = async ({ request }: { request: Request }) => {
+  const supabase = createServerClient(request);
   const formData = await request.formData();
   const content = formData.get("content") as string;
   const channelId = formData.get("channelId") as string;
@@ -38,6 +42,7 @@ export const action = async ({ request }: { request: Request }) => {
 };
 
 export default () => {
+  const supabase = createBrowserClient();
   const { loadedMessages, channelId, serverId } =
     useLoaderData<typeof loader>();
   const fetcher = useFetcher<typeof loader>();
@@ -49,7 +54,7 @@ export default () => {
       .on(
         "postgres_changes",
         { event: "*", schema: "public", table: "message" },
-        (payload) => {
+        () => {
           fetcher.load(`/servers/${serverId}/${channelId}`);
         }
       )

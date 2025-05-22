@@ -66,28 +66,25 @@ export type Database = {
           channel_id: string | null
           content: string
           created_at: string | null
-          created_by: string | null
           id: string
           updated_at: string | null
-          updated_by: string | null
+          user_id: string | null
         }
         Insert: {
           channel_id?: string | null
           content: string
           created_at?: string | null
-          created_by?: string | null
           id?: string
           updated_at?: string | null
-          updated_by?: string | null
+          user_id?: string | null
         }
         Update: {
           channel_id?: string | null
           content?: string
           created_at?: string | null
-          created_by?: string | null
           id?: string
           updated_at?: string | null
-          updated_by?: string | null
+          user_id?: string | null
         }
         Relationships: [
           {
@@ -98,15 +95,8 @@ export type Database = {
             referencedColumns: ["id"]
           },
           {
-            foreignKeyName: "message_created_by_fkey"
-            columns: ["created_by"]
-            isOneToOne: false
-            referencedRelation: "user"
-            referencedColumns: ["id"]
-          },
-          {
-            foreignKeyName: "message_updated_by_fkey"
-            columns: ["updated_by"]
+            foreignKeyName: "message_user_id_fkey"
+            columns: ["user_id"]
             isOneToOne: false
             referencedRelation: "user"
             referencedColumns: ["id"]

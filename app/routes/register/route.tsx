@@ -1,7 +1,8 @@
-import { supabase } from "~/database";
+import { createBrowserClient } from "~/database";
 import { Link } from "@remix-run/react";
 
 export default () => {
+  const supabase = createBrowserClient();
   const handleRegister = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
 

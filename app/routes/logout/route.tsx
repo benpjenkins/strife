@@ -1,7 +1,8 @@
 import { useEffect } from "react";
-import { supabase } from "~/database";
+import { createBrowserClient } from "~/database";
 
 export default () => {
+  const supabase = createBrowserClient();
   useEffect(() => {
     async function signOutAndRedirect() {
       const { error } = await supabase.auth.signOut();

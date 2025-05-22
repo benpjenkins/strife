@@ -10,7 +10,7 @@ import {
 
 import "./tailwind.css";
 import { useEffect } from "react";
-import { supabase } from "./database";
+import { createBrowserClient } from "./database";
 
 export const meta = () => {
   return [{ title: "Strife" }];
@@ -29,6 +29,7 @@ export function Layout({ children }: { children: React.ReactNode }) {
   const data = useLoaderData<typeof loader>();
   const { STRIFE_ENV } = data;
   const fetcher = useFetcher();
+  const supabase = createBrowserClient();
 
   useEffect(() => {
     supabase.auth.onAuthStateChange((event, session) => {

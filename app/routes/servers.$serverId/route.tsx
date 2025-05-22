@@ -1,18 +1,27 @@
 import { Link, Outlet, useLoaderData } from "@remix-run/react";
-import { supabase } from "~/database";
+import { createServerClient } from "~/database";
 
 type LoaderParams = {
-  params: {
-    serverId: string;
-  };
+  serverId: string;
 };
 
-export const loader = async ({ params: { serverId } }: LoaderParams) => {
+type LoaderArgs = {
+  request: Request;
+  params: LoaderParams;
+};
+
+export const loader = async ({ request, params }: LoaderArgs) => {
+  const { serverId } = params;
+  console.log("serverId", serverId);
+
+  const supabase = createServerClient(request);
   const { data: channels, error } = await supabase
     .from("channel")
     .select("*")
     .eq("server_id", serverId);
+
   if (error) throw error;
+
   return {
     channels,
     serverId,
@@ -25,6 +34,7 @@ export default () => {
   return (
     <div className="flex flex-row gap-4">
       <div className="flex flex-col gap-4">
+        {/* @ts-ignore */}
         {channels.map((channel) => {
           return (
             <Link key={channel.id} to={`/servers/${serverId}/${channel.id}`}>

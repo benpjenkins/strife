@@ -1,7 +1,9 @@
 import { Link, Outlet, useLoaderData } from "@remix-run/react";
-import { supabase } from "~/database";
+import { type LoaderFunctionArgs } from "@remix-run/node";
+import { createServerClient } from "~/database";
 
-export const loader = async () => {
+export const loader = async ({ request }: { request: Request }) => {
+  const supabase = createServerClient(request);
   const { data: servers, error } = await supabase.from("server").select("*");
   if (error) throw error;
   return {
