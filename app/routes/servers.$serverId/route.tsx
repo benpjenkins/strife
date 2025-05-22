@@ -1,4 +1,4 @@
-import { Link, Outlet, useLoaderData, useMatches } from "@remix-run/react";
+import { Link, Outlet, useLoaderData } from "@remix-run/react";
 import { supabase } from "~/database";
 
 type LoaderParams = {
@@ -15,14 +15,12 @@ export const loader = async ({ params: { serverId } }: LoaderParams) => {
   if (error) throw error;
   return {
     channels,
+    serverId,
   };
 };
 
 export default () => {
-  const { channels } = useLoaderData<typeof loader>();
-  const matches = useMatches();
-  const lastMatch = matches[matches.length - 1];
-  const serverId = lastMatch.params.serverId;
+  const { channels, serverId } = useLoaderData<typeof loader>();
 
   return (
     <div className="flex flex-row gap-4">
@@ -30,7 +28,7 @@ export default () => {
         {channels.map((channel) => {
           return (
             <Link key={channel.id} to={`/servers/${serverId}/${channel.id}`}>
-              {channel.name}
+              #{channel.name}
             </Link>
           );
         })}

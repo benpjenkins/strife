@@ -34,6 +34,8 @@ create table if not exists public.message (
     user_id uuid references public.user(id) on delete cascade default auth.uid()
 );
 
+alter publication supabase_realtime add table public.message;
+
 create or replace function "public"."handle_new_user"() returns trigger
     language "plpgsql" security definer
     as $$
