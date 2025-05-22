@@ -74,3 +74,8 @@ values
     ('cf06ff72-2f7c-422e-86a3-9faec134b25e', '17ff0f86-ca3e-4573-9c74-2350f163fe96', 'hope-core', now(), now(), '86a75009-7ce4-40e8-b132-53b3cc54edd0', '86a75009-7ce4-40e8-b132-53b3cc54edd0'),
     ('9378f0f3-5fac-4f26-9407-afe363be6694', '2d2f9243-2a2b-4dc1-aa39-a70203f505d1', 'noms-noms', now(), now(), '86a75009-7ce4-40e8-b132-53b3cc54edd0', '86a75009-7ce4-40e8-b132-53b3cc54edd0'),
     ('cd018afd-5e0c-49c4-89d0-58c50ec70f64', '17ff0f86-ca3e-4573-9c74-2350f163fe96', 'heckin-good-boys-and-girls', now(), now(), '86a75009-7ce4-40e8-b132-53b3cc54edd0', '86a75009-7ce4-40e8-b132-53b3cc54edd0');
+
+insert into public.message (id, channel_id, user_id, content, created_at, updated_at)
+values
+    ('765b366e-7c8f-4b92-a8b2-c1ca2694e544', 'a6333e55-ccc2-4118-a568-26eb763e7abc', '86a75009-7ce4-40e8-b132-53b3cc54edd0', 'Hello, world!', now(), now()),
+    ('4e43ff45-a64d-4160-83d2-c50e876adeaf', 'cf06ff72-2f7c-422e-86a3-9faec134b25e', '86a75009-7ce4-40e8-b132-53b3cc54edd0', 'This is a test message.', now(), now());

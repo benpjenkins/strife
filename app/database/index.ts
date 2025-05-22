@@ -1,4 +1,5 @@
 import { createClient } from "@supabase/supabase-js";
+import { Database } from "~/types/database.types";
 
 const isServer = typeof window === "undefined";
 
@@ -14,4 +15,4 @@ if (!supabaseUrl || !supabaseKey) {
   throw new Error("Supabase URL and Key must be provided");
 }
 
-export const supabase = createClient(supabaseUrl, supabaseKey);
+export const supabase = createClient<Database>(supabaseUrl, supabaseKey);

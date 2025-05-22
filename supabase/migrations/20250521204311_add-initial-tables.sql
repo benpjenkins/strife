@@ -25,6 +25,15 @@ create table if not exists public.channel (
     updated_by uuid references public.user(id) on delete cascade default auth.uid()
 );
 
+create table if not exists public.message (
+    id uuid primary key default gen_random_uuid(),
+    channel_id uuid references channel(id) on delete cascade,
+    content text not null,
+    created_at timestamp with time zone default now(),
+    updated_at timestamp with time zone default now(),
+    user_id uuid references public.user(id) on delete cascade default auth.uid()
+);
+
 create or replace function "public"."handle_new_user"() returns trigger
     language "plpgsql" security definer
     as $$
