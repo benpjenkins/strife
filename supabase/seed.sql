@@ -30,7 +30,7 @@ INSERT INTO "auth"."audit_log_entries" ("instance_id", "id", "payload", "created
 
 INSERT INTO "auth"."users" ("instance_id", "id", "aud", "role", "email", "encrypted_password", "email_confirmed_at", "invited_at", "confirmation_token", "confirmation_sent_at", "recovery_token", "recovery_sent_at", "email_change_token_new", "email_change", "email_change_sent_at", "last_sign_in_at", "raw_app_meta_data", "raw_user_meta_data", "is_super_admin", "created_at", "updated_at", "phone", "phone_confirmed_at", "phone_change", "phone_change_token", "phone_change_sent_at", "email_change_token_current", "email_change_confirm_status", "banned_until", "reauthentication_token", "reauthentication_sent_at", "is_sso_user", "deleted_at", "is_anonymous") VALUES
 	('00000000-0000-0000-0000-000000000000', '86a75009-7ce4-40e8-b132-53b3cc54edd0', 'authenticated', 'authenticated', 'ben@benjenkins.dev', '$2a$10$3ehuCPU19GAhxesRcK2BUeZL61KgqFO6/ETi0O7SfxdePut9HHmXu', '2025-05-21 22:49:36.090252+00', NULL, '', NULL, '', NULL, '', '', NULL, NULL, '{"provider": "email", "providers": ["email"]}', '{"email_verified": true,
-    "display_name": "Ben Jenkins"}', null, '2025-05-21 22:49:36.079374+00', '2025-05-21 22:49:36.091724+00', NULL, NULL, '', '', NULL, '', 0, NULL, '', NULL, false, NULL, false);
+    "userName": "Ben Jenkins"}', null, '2025-05-21 22:49:36.079374+00', '2025-05-21 22:49:36.091724+00', NULL, NULL, '', '', NULL, '', 0, NULL, '', NULL, false, NULL, false);
 
 
 --

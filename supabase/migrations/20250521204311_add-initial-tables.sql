@@ -41,7 +41,7 @@ create or replace function "public"."handle_new_user"() returns trigger
     as $$
 begin
   insert into public.user (id, email, user_name)
-  values (new.id, new.email, new.raw_user_meta_data->>'display_name');
+  values (new.id, new.email, new.raw_user_meta_data->>'userName');
   return new;
 end;
 $$;
@@ -53,7 +53,7 @@ create or replace function "public"."handle_update_user"() returns trigger
 begin
   update public.user
   set (email, user_name) = (new.email, 
-    new.raw_user_meta_data->>'display_name')
+    new.raw_user_meta_data->>'userName')
   where id = new.id;
   return new;
 end;
