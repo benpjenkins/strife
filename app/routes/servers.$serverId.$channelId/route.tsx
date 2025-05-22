@@ -58,11 +58,10 @@ export default () => {
     return () => {
       supabase.removeChannel(channel);
     };
-  }, []);
+  }, [channelId]);
 
   useEffect(() => {
     if (fetcher.data) {
-      console.log("fetcher.data", fetcher.data);
       setMessages([...fetcher.data.loadedMessages]);
     }
   }, [fetcher.data]);

@@ -91,5 +91,5 @@ returns trigger as $$
 create trigger handle_update_server before update on public.server
   for each row execute procedure on_updated ();
 
-  create trigger handle_update_channel before update on public.channel
+create trigger handle_update_channel before update on public.channel
   for each row execute procedure on_updated ();

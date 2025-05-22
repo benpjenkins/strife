@@ -9,14 +9,10 @@ export default () => {
     const email = formData.get("email") as string;
     const password = formData.get("password") as string;
 
-    console.log({ email, password });
-
     const { data, error } = await supabase.auth.signInWithPassword({
       email,
       password,
     });
-
-    console.log({ data, error });
   };
   return (
     <div className="h-screen flex flex-col items-center justify-center bg-gray-800 text-white">
