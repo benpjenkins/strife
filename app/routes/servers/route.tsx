@@ -14,12 +14,12 @@ export const loader = async ({ request }: { request: Request }) => {
 export default () => {
   const { servers } = useLoaderData<typeof loader>();
   return (
-    <div className="flex flex-row gap-4 m-8">
-      <div className="flex flex-col gap-4">
+    <div className="flex flex-row  h-screen w-screen">
+      <div className="flex flex-col gap-4 bg-gray-900 px-4 py-8">
         {servers.map((server) => {
           return (
             <Link
-              className="font-medium text-blue-600 dark:text-blue-500 hover:underline"
+              className="font-medium text-white dark:text-blue-500 hover:underline"
               to={`/servers/${server.id}`}
               key={server.id}
             >

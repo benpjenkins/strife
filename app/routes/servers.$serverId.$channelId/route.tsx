@@ -16,15 +16,22 @@ type LoaderArgs = {
 export const loader = async ({ request, params }: LoaderArgs) => {
   const supabase = createServerClient(request);
   const { channelId, serverId } = params;
-  const { data: loadedMessages, error } = await supabase
+  const { data: loadedMessages, error: messagesError } = await supabase
     .from("message")
-    .select("*")
+    .select("id, content, user(user_name)")
     .eq("channel_id", channelId);
-  if (error) throw error;
+  if (messagesError) throw messagesError;
+
+  const { data: channel, error: channelError } = await supabase
+    .from("channel")
+    .select("*")
+    .eq("id", channelId)
+    .single();
   return {
     loadedMessages,
     channelId,
     serverId,
+    channel,
   };
 };
 
@@ -43,7 +50,7 @@ export const action = async ({ request }: { request: Request }) => {
 
 export default () => {
   const supabase = createBrowserClient();
-  const { loadedMessages, channelId, serverId } =
+  const { loadedMessages, channel, channelId, serverId } =
     useLoaderData<typeof loader>();
   const fetcher = useFetcher<typeof loader>();
   const [messages, setMessages] = useState([...loadedMessages]);
@@ -76,14 +83,25 @@ export default () => {
   }, [loadedMessages]);
 
   return (
-    <div className="flex flex-col gap-4">
-      {messages.map((message) => {
-        return <p key={message.id}>{message.content}</p>;
-      })}
-      <Form method="post">
-        <input name="content" />
+    <div className="flex flex-col gap-4 h-screen">
+      <h1 className="text-2xl uppercase mb-2">{channel?.name}</h1>
+      <p className="text-gray-600 border-b border-gray-300 pb-4">
+        {channel?.description}
+      </p>
+      <div className="flex-1 flex flex-col p-2">
+        {messages.map((message) => {
+          return (
+            <div key={message.id}>
+              <p className="text-base">{message.content}</p>
+              <span className="block text-xs">{message.user?.user_name}</span>
+            </div>
+          );
+        })}
+      </div>
+      <Form method="post" className="flex">
+        <input name="content" className="border border-gray-200 px-2 flex-1" />
         <input type="hidden" name="channelId" value={channelId} />
-        <button>Send</button>
+        <button className="px-4 py-2 ml-4 bg-blue-200">Send</button>
       </Form>
     </div>
   );

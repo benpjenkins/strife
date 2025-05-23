@@ -19,6 +19,7 @@ create table if not exists public.channel (
     id uuid primary key default gen_random_uuid(),
     server_id uuid references server(id) on delete cascade,
     name text not null,
+    description text,
     created_at timestamp with time zone default now(),
     updated_at timestamp with time zone default now(),
     created_by uuid references public.user(id) on delete cascade default auth.uid(),

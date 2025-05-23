@@ -32,18 +32,20 @@ export default () => {
   const { channels, serverId } = useLoaderData<typeof loader>();
 
   return (
-    <div className="flex flex-row gap-4">
-      <div className="flex flex-col gap-4">
-        {/* @ts-ignore */}
+    <div className="flex flex-row gap-4  h-screen w-screen">
+      <div className="flex flex-col gap-4 bg-gray-800 text-white w-40 p-8">
         {channels.map((channel) => {
           return (
             <Link key={channel.id} to={`/servers/${serverId}/${channel.id}`}>
-              #{channel.name}
+              <span className="text-gray-400 mr-1">#</span>
+              {channel.name}
             </Link>
           );
         })}
       </div>
-      <Outlet />
+      <div className="p-8 flex-1 flex flex-col ">
+        <Outlet />
+      </div>
     </div>
   );
 };

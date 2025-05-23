@@ -13,6 +13,7 @@ export type Database = {
         Row: {
           created_at: string | null
           created_by: string | null
+          description: string | null
           id: string
           name: string
           server_id: string | null
@@ -22,6 +23,7 @@ export type Database = {
         Insert: {
           created_at?: string | null
           created_by?: string | null
+          description?: string | null
           id?: string
           name: string
           server_id?: string | null
@@ -31,6 +33,7 @@ export type Database = {
         Update: {
           created_at?: string | null
           created_by?: string | null
+          description?: string | null
           id?: string
           name?: string
           server_id?: string | null

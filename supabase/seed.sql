@@ -68,12 +68,12 @@ values
     ('2d2f9243-2a2b-4dc1-aa39-a70203f505d1', 'Mefca', now(), now(), '86a75009-7ce4-40e8-b132-53b3cc54edd0', '86a75009-7ce4-40e8-b132-53b3cc54edd0'),
     ('17ff0f86-ca3e-4573-9c74-2350f163fe96', 'Mefca Classic', now(), now(), '86a75009-7ce4-40e8-b132-53b3cc54edd0', '86a75009-7ce4-40e8-b132-53b3cc54edd0');
 
-insert into public.channel (id, server_id, name, created_at, updated_at, created_by, updated_by)
+insert into public.channel (id, server_id, name, created_at, updated_at, created_by, updated_by, description)
 values
-    ('a6333e55-ccc2-4118-a568-26eb763e7abc', '2d2f9243-2a2b-4dc1-aa39-a70203f505d1', 'general', now(), now(), '86a75009-7ce4-40e8-b132-53b3cc54edd0', '86a75009-7ce4-40e8-b132-53b3cc54edd0'),
-    ('cf06ff72-2f7c-422e-86a3-9faec134b25e', '17ff0f86-ca3e-4573-9c74-2350f163fe96', 'hope-core', now(), now(), '86a75009-7ce4-40e8-b132-53b3cc54edd0', '86a75009-7ce4-40e8-b132-53b3cc54edd0'),
-    ('9378f0f3-5fac-4f26-9407-afe363be6694', '2d2f9243-2a2b-4dc1-aa39-a70203f505d1', 'noms-noms', now(), now(), '86a75009-7ce4-40e8-b132-53b3cc54edd0', '86a75009-7ce4-40e8-b132-53b3cc54edd0'),
-    ('cd018afd-5e0c-49c4-89d0-58c50ec70f64', '17ff0f86-ca3e-4573-9c74-2350f163fe96', 'heckin-good-boys-and-girls', now(), now(), '86a75009-7ce4-40e8-b132-53b3cc54edd0', '86a75009-7ce4-40e8-b132-53b3cc54edd0');
+    ('a6333e55-ccc2-4118-a568-26eb763e7abc', '2d2f9243-2a2b-4dc1-aa39-a70203f505d1', 'dogs', now(), now(), '86a75009-7ce4-40e8-b132-53b3cc54edd0', '86a75009-7ce4-40e8-b132-53b3cc54edd0', 'A place to talk about dogs'),
+    ('cf06ff72-2f7c-422e-86a3-9faec134b25e', '17ff0f86-ca3e-4573-9c74-2350f163fe96', 'cats', now(), now(), '86a75009-7ce4-40e8-b132-53b3cc54edd0', '86a75009-7ce4-40e8-b132-53b3cc54edd0', 'A place to talk about cats'),
+    ('9378f0f3-5fac-4f26-9407-afe363be6694', '2d2f9243-2a2b-4dc1-aa39-a70203f505d1', 'noms-noms', now(), now(), '86a75009-7ce4-40e8-b132-53b3cc54edd0', '86a75009-7ce4-40e8-b132-53b3cc54edd0', 'A place to talk about nom noms'),
+    ('cd018afd-5e0c-49c4-89d0-58c50ec70f64', '17ff0f86-ca3e-4573-9c74-2350f163fe96', 'heckin-good-boys-and-girls', now(), now(), '86a75009-7ce4-40e8-b132-53b3cc54edd0', '86a75009-7ce4-40e8-b132-53b3cc54edd0', 'A place to talk about pets');
 
 insert into public.message (id, channel_id, user_id, content, created_at, updated_at)
 values
