@@ -17,6 +17,7 @@ export default () => {
       email,
       password,
       options: {
+        emailRedirectTo: "https://strife.benjenkins.dev/login",
         data: {
           userName,
         },
