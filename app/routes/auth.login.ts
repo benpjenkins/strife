@@ -1,4 +1,4 @@
-import { commitSession, getSession } from "~/utils/cookie";
+import { commitSession, getSession, MAX_AGE } from "~/utils/cookie";
 import { redirect } from "@remix-run/node";
 
 export const action = async ({ request }: { request: Request }) => {
@@ -6,7 +6,9 @@ export const action = async ({ request }: { request: Request }) => {
   const accessToken = formData.get("accessToken") as string;
   const session = await getSession(accessToken);
   session.set("access_token", accessToken);
-  const cookie = await commitSession(session);
+  const cookie = await commitSession(session, {
+    expires: new Date(Date.now() + MAX_AGE * 1000),
+  });
 
   return redirect("/servers", {
     headers: {

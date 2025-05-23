@@ -11,6 +11,7 @@ import {
 import "./tailwind.css";
 import { useEffect } from "react";
 import { createBrowserClient } from "./database";
+import { UNAUTHENTICED_ROUTES } from "./constants/routes";
 
 export const meta = () => {
   return [{ title: "Strife" }];
@@ -33,20 +34,23 @@ export function Layout({ children }: { children: React.ReactNode }) {
 
   useEffect(() => {
     supabase.auth.onAuthStateChange((event, session) => {
+      console.log("event", event, "session", session);
       if (event === "SIGNED_IN") {
         if (!session?.access_token) {
           console.error("No access token found");
           return;
         }
-        fetcher.submit(
-          {
-            accessToken: session?.access_token,
-          },
-          {
-            method: "post",
-            action: "/auth/login",
-          }
-        );
+        if (UNAUTHENTICED_ROUTES.includes(location.pathname)) {
+          fetcher.submit(
+            {
+              accessToken: session?.access_token,
+            },
+            {
+              method: "post",
+              action: "/auth/login",
+            }
+          );
+        }
       }
     });
   }, []);

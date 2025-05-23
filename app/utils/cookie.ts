@@ -13,7 +13,6 @@ const { getSession, commitSession, destroySession } =
     cookie: {
       name: "sb-token",
       maxAge: MAX_AGE,
-      expires: new Date(Date.now() + MAX_AGE * 1000),
       domain: "",
       path: "/",
       sameSite: "lax",
@@ -23,4 +22,4 @@ const { getSession, commitSession, destroySession } =
     },
   });
 
-export { getSession, commitSession, destroySession };
+export { getSession, commitSession, destroySession, MAX_AGE };
