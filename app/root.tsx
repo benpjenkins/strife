@@ -34,7 +34,6 @@ export function Layout({ children }: { children: React.ReactNode }) {
 
   useEffect(() => {
     supabase.auth.onAuthStateChange((event, session) => {
-      console.log("event", event, "session", session);
       if (event === "SIGNED_IN") {
         if (!session?.access_token) {
           console.error("No access token found");
