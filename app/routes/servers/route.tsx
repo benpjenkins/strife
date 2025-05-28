@@ -1,4 +1,4 @@
-import { Form, Link, Outlet, useLoaderData } from "@remix-run/react";
+import { Form, Link, Outlet, useLoaderData, useSubmit } from "@remix-run/react";
 import { createServerClient } from "~/database";
 import { Modal } from "~/components/Modal";
 import { useState } from "react";
@@ -27,7 +27,13 @@ export const action = async ({ request }: { request: Request }) => {
 
 export default () => {
   const { servers } = useLoaderData<typeof loader>();
+  const submit = useSubmit();
   const [isModalOpen, setIsModalOpen] = useState(false);
+
+  const handleSubmit = () => {
+    setIsModalOpen(false);
+    submit(new FormData(), { method: "post" });
+  };
 
   return (
     <div className="flex flex-row  h-screen w-screen">
@@ -41,7 +47,7 @@ export default () => {
               Create Server
             </h3>
             <div className="mt-2">
-              <Form method="post">
+              <Form onSubmit={handleSubmit} method="post">
                 <div className="w-full">
                   <Input
                     name="serverName"
