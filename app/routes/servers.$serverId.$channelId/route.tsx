@@ -1,7 +1,8 @@
 import { Form, useFetcher, useLoaderData } from "@remix-run/react";
 import { createBrowserClient, createServerClient } from "~/database";
 import { useEffect, useState } from "react";
-import { Tables } from "~/types/database.types";
+import { Input } from "~/components/Input";
+import { Button } from "~/components/Button";
 
 type LoaderParams = {
   channelId: string;
@@ -99,9 +100,11 @@ export default () => {
         })}
       </div>
       <Form method="post" className="flex">
-        <input name="content" className="border border-gray-200 px-2 flex-1" />
+        <Input name="content" />
         <input type="hidden" name="channelId" value={channelId} />
-        <button className="px-4 py-2 ml-4 bg-blue-200">Send</button>
+        <div className="ml-8">
+          <Button type="submit">Send</Button>
+        </div>
       </Form>
     </div>
   );
