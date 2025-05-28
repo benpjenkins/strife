@@ -71,7 +71,7 @@ export default () => {
                     className="w-full mb-4"
                   />
                   <Input
-                    name="channelDescription"
+                    name="description"
                     placeholder="Channel Description"
                     className="w-full mb-4"
                   />
